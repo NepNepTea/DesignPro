@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if num_bad_logins == 2 %}
+  <p>У вас осталась одна попытка</p>
+{% endif %}
+
+{% if num_bad_logins >= 3 %}
+  <p>Вы сможете войти только через 2 минуты</p>
+{% endif %}
+
+{% if num_bad_logins <= 2 %}
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Ваш аккаунт не имеет доступ к этой странице, войдите в аккаунт у которого есть доступ</p>
+    {% else %}
+      <p>Пожалуйста войдите чтобы видеть эту страницу</p>
+    {% endif %}
+  {% endif %}
+  <div class="d-flex justify-content-center">
+      <div class="border border-primary w-25 p-3">
+          <form method="POST" novalidate>
+              {% csrf_token %}
+              <h2>Войти</h2>
+              {{form.as_p}}
+              <input type="submit" class="btn btn-primary" value="Войти" />
+              <input type="hidden" name="next" value="{{ next }}" />
+          </form>
+      </div>
+  </div>
+
+{% endif %}
+
+{% endblock %}
