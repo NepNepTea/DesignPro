@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="border border-primary w-75 p-3">
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            <h2>Регистрация</h2>
+            {{ form.as_p }}		
+            <input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
+        </form>
+</div>
+</div>
+{% endblock content%}
