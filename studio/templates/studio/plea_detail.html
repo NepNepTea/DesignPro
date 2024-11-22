@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Title: {{ plea.name }}</h2>
+  <div style="display: flex; gap: 16px">
+    <div>
+      <img src="{{plea.plan.url}}" alt="" style="width: 120px">
+    </div>
+    <div style="width: 50%">
+      <p><strong>description:</strong> {{ plea.description }}</p>
+      <p><strong>category:</strong> {{ plea.category }}</p>
+    </div>
+  </div>
+{% endblock %}

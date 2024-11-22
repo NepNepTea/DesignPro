@@ -4,6 +4,9 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from .forms import LoginForm
 from django.core.cache import cache
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Plea
+
 
 def index(request):
 
@@ -62,3 +65,7 @@ def sign_in(request):
             return render(request,'studio/login_too_much.html')
         elif cache.get("num_bad_login", 0) >= 4:
             return render(request,'studio/blocked.html')
+
+class PleaCreate(CreateView):
+    model = Plea
+    fields = ["name", "description", "category", "plan"]

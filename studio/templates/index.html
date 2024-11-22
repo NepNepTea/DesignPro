@@ -3,5 +3,8 @@
 {% block content %}
 <main>
     <h1>Добро пожаловать на главную страницу</h1>
+    {% if user.is_authenticated %}
+    <a href="{% url 'plea_create'%}">Создать заявку на разработку дизайна</a>
+    {% endif %}
 </main>
 {% endblock %}
