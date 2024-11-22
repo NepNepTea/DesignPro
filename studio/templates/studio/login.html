@@ -2,15 +2,6 @@
 
 {% block content %}
 
-{% if num_bad_logins == 2 %}
-  <p>У вас осталась одна попытка</p>
-{% endif %}
-
-{% if num_bad_logins >= 3 %}
-  <p>Вы сможете войти только через 2 минуты</p>
-{% endif %}
-
-{% if num_bad_logins <= 2 %}
   {% if next %}
     {% if user.is_authenticated %}
       <p>Ваш аккаунт не имеет доступ к этой странице, войдите в аккаунт у которого есть доступ</p>
@@ -29,7 +20,5 @@
           </form>
       </div>
   </div>
-
-{% endif %}
 
 {% endblock %}
