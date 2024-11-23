@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Мои заявки</h1>
+  {% if plea_list %}
+    <ul>
+      {% for plea in plea_list %}
+      <li>
+        <a href="{{ plea.get_absolute_url }}">{{ plea.name }}</a> {{ plea.status }}
+        <a href="{{ plea.get_absolute_url }}/delete/">Удалить заявку</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>У вас нет заявок</p>
+  {% endif %}
+{% endblock %}

@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -29,9 +31,16 @@ class Plea(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=1000, help_text="Введите описание заявки")
-    category = models.ManyToManyField(Category, help_text="Выберите категорию заявки")
-    plan = models.ImageField(upload_to ='images/')
-    status = models.BooleanField(default=False)
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, help_text="Выберите категорию заявки")
+    plan = models.ImageField(upload_to ='images/', null=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    LOAN_STATUS = (
+        ('n', 'Новая'),
+        ('c', 'Выполнено'),
+    )
+
+    status = models.CharField(max_length=1, choices=LOAN_STATUS, blank=True, default='n', help_text='Статус заявки')
 
     def get_absolute_url(self):
         return reverse('plea-detail', args=[str(self.id)])

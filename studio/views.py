@@ -6,7 +6,11 @@ from .forms import LoginForm
 from django.core.cache import cache
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plea
-
+from .forms import PleaForm
+from django.contrib.auth.models import User
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 def index(request):
 
@@ -66,6 +70,37 @@ def sign_in(request):
         elif cache.get("num_bad_login", 0) >= 4:
             return render(request,'studio/blocked.html')
 
-class PleaCreate(CreateView):
+def plea_create(request):
+    if request.method == 'GET':
+        form = PleaForm()
+        return render(request, 'studio/plea_form.html', { 'form': form})
+    if request.method == 'POST':
+        form = PleaForm(request.POST, request.FILES) 
+        if form.is_valid():
+            name = form.cleaned_data.get("name")
+            description = form.cleaned_data.get("description")
+            category = form.cleaned_data.get("category")
+            if request.user.is_authenticated:
+                username = request.user.username
+            plan = form.cleaned_data.get("plan")
+            obj = Plea.objects.create(name = name, description = description, category = category, plan = plan, author = User.objects.get(username = username))
+            obj.save()
+            messages.success(request, 'Вы успешно создали заявку')
+            return redirect('index')
+        else:
+            return render(request, 'studio/plea_form.html', {'form': form})
+
+class PleaDetailView(generic.DetailView):
     model = Plea
-    fields = ["name", "description", "category", "plan"]
+
+
+class PleaListView(LoginRequiredMixin,generic.ListView):
+    model = Plea
+    template_name ='studio/plea_list.html'
+
+    def get_queryset(self):
+        return Plea.objects.filter(author=self.request.user) #.filter(status__exact='o').order_by('due_back')
+
+class PleaDelete(DeleteView):
+    model = Plea
+    success_url = reverse_lazy('pleas')

@@ -29,7 +29,7 @@
                       Профиль
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Мои заявки</a></li>
+                      <li><a class="dropdown-item" href="{% url 'pleas'%}">Мои заявки</a></li>
                       <li><a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Выход</a></li>
                     </ul>
                 </li>
