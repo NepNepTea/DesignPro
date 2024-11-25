@@ -33,6 +33,11 @@
                       <li><a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Выход</a></li>
                     </ul>
                 </li>
+                  {% if user.is_staff %}
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inactives'%}">Активация пользователей</a>
+                  </li>
+                  {% endif %}
                 {% else %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'register'%}?next={{request.path}}">Регистрация</a>

@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 
 def index(request):
 
@@ -29,9 +30,9 @@ def sign_up(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            user.is_active = False
             user.save()
-            messages.success(request, 'Вы успешно зарегестрировались')
-            login(request, user)
+            messages.success(request, ':ждите подтверждение от пользователя')
             return redirect('index')
         else:
             return render(request, 'studio/register.html', {'form': form})
@@ -124,3 +125,19 @@ class PleaListViewI(LoginRequiredMixin,generic.ListView):
 
     def get_queryset(self):
         return Plea.objects.filter(author=self.request.user).order_by('creationDate').filter(status='i')
+
+class UserListView(LoginRequiredMixin,generic.ListView):
+    model = User
+    template_name ='studio/user_activation.html'
+
+    def get_queryset(self):
+        return User.objects.filter(is_active=False)
+
+def activate_user(request, pk):
+
+    user = get_object_or_404(User, pk=pk)
+
+    if request.method == 'GET':
+        user.is_active = True
+        user.save()
+        return render(request, 'studio/user_activate.html')

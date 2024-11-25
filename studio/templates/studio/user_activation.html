@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Пользователи ждущие активации</h1>
+  {% if user_list %}
+    <ul>
+      {% for user in user_list %}
+      <li>
+        <hr>
+        <p>{{ user.username }}</p>
+        <a href="#">активировать</a>
+        <hr>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Нет неактивированных пользователей</p>
+  {% endif %}
+{% endblock %}
