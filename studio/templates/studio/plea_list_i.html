@@ -5,7 +5,7 @@
   <p>фильтрация</p>
   <a href="{% url 'pleas_n'%}">Новые</a>
   <a href="{% url 'pleas_c'%}">Выполненые</a>
-  <a href="{% url 'pleas_i'%}">Принятые в работу</a>
+  <a href="{% url 'pleas'%}">Все</a>
   {% if plea_list %}
     <ul>
       {% for plea in plea_list %}

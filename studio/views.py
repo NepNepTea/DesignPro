@@ -93,14 +93,34 @@ def plea_create(request):
 class PleaDetailView(generic.DetailView):
     model = Plea
 
-
 class PleaListView(LoginRequiredMixin,generic.ListView):
     model = Plea
     template_name ='studio/plea_list.html'
 
     def get_queryset(self):
-        return Plea.objects.filter(author=self.request.user) #.filter(status__exact='o').order_by('due_back')
+        return Plea.objects.filter(author=self.request.user).order_by('creationDate')#.filter(status='n')
 
 class PleaDelete(DeleteView):
     model = Plea
     success_url = reverse_lazy('pleas')
+
+class PleaListViewN(LoginRequiredMixin,generic.ListView):
+    model = Plea
+    template_name ='studio/plea_list_n.html'
+
+    def get_queryset(self):
+        return Plea.objects.filter(author=self.request.user).order_by('creationDate').filter(status='n')
+
+class PleaListViewC(LoginRequiredMixin,generic.ListView):
+    model = Plea
+    template_name ='studio/plea_list_c.html'
+
+    def get_queryset(self):
+        return Plea.objects.filter(author=self.request.user).order_by('creationDate').filter(status='c')
+
+class PleaListViewI(LoginRequiredMixin,generic.ListView):
+    model = Plea
+    template_name ='studio/plea_list_i.html'
+
+    def get_queryset(self):
+        return Plea.objects.filter(author=self.request.user).order_by('creationDate').filter(status='i')

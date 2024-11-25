@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
 from django.contrib.auth.models import User
-
+from datetime import date
 
 class Category(models.Model):
     name = models.CharField(
@@ -34,10 +34,12 @@ class Plea(models.Model):
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, help_text="Выберите категорию заявки")
     plan = models.ImageField(upload_to ='images/', null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    creationDate = models.DateField(default=date.today)
 
     LOAN_STATUS = (
         ('n', 'Новая'),
         ('c', 'Выполнено'),
+        ('i', 'принято в работу')
     )
 
     status = models.CharField(max_length=1, choices=LOAN_STATUS, blank=True, default='n', help_text='Статус заявки')
