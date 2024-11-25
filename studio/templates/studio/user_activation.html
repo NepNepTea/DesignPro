@@ -8,7 +8,7 @@
       <li>
         <hr>
         <p>{{ user.username }}</p>
-        <a href="#">активировать</a>
+        <a href="{% url 'activate_user' user.id %}">активировать</a>
         <hr>
       </li>
       {% endfor %}

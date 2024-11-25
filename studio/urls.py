@@ -14,5 +14,5 @@ urlpatterns = [
     re_path(r'^pleasi/$', views.PleaListViewI.as_view(), name='pleas_i'),
     re_path(r'^plea/(?P<pk>\d+)/delete/$', views.PleaDelete.as_view(), name='plea_delete'),
     re_path(r'^inactives/$', views.UserListView.as_view(), name='inactives'),
-    re_path(r'^inactive/(?P<pk>\d+)/activate/$', views.activate_user, name='user_activate'),
+    re_path(r'^inactive/(?P<pk>[-\w]+)/activate/$', views.activate_user, name='activate_user'),
 ]

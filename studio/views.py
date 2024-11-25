@@ -12,6 +12,9 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from .forms import ActivateUserForm
 
 def index(request):
 
@@ -133,11 +136,23 @@ class UserListView(LoginRequiredMixin,generic.ListView):
     def get_queryset(self):
         return User.objects.filter(is_active=False)
 
+    
 def activate_user(request, pk):
+    inactive_user = get_object_or_404(User, pk=pk)
 
-    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
 
-    if request.method == 'GET':
-        user.is_active = True
-        user.save()
-        return render(request, 'studio/user_activate.html')
+        form = ActivateUserForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            inactive_user.is_active = form.cleaned_data['is_active']
+            inactive_user.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('inactives') )
+
+    else:
+        form = ActivateUserForm()
+        return render(request, 'studio/user_activate.html', {'form': form, 'inactive_user':inactive_user})

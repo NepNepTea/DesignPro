@@ -18,3 +18,5 @@ class PleaForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
     plan = forms.ImageField()
 
+class ActivateUserForm(forms.Form):
+    is_active = forms.BooleanField(initial=True, disabled=True)
