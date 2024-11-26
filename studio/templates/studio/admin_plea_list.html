@@ -14,7 +14,7 @@
         <p>Категория: {{ plea.category }}</p>
         {% if plea.status == 'n' %}
         <p>Статус: Новая</p>
-        <a href="#">Принять в работу</a><br>
+        <a href="{% url 'plea_work' plea.id %}">Принять в работу</a><br>
         <a href="{% url 'plea_complete' plea.id %}">Выполнить</a>
         {% elif plea.status == 'c' %}
         <p>Статус: Выполнено</p>

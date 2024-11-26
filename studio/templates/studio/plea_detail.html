@@ -4,11 +4,24 @@
 <h2>Название: {{ plea.name }}</h2>
   <div style="display: flex; gap: 16px">
     <div>
+      <p>План</p>
       <img src="{{plea.plan.url}}" alt="" style="width: 120px">
+      {% if plea.design %}
+      <p>Дизайн</p>
+      <img src="{{plea.design.url}}" alt="" style="width: 120px">
+      {% endif %}
     </div>
     <div style="width: 50%">
       <p><strong>описание:</strong> {{ plea.description }}</p>
       <p><strong>категория:</strong> {{ plea.category }}</p>
+      <p><strong>коментарий:</strong> {{ plea.comentary }}</p>
+      {% if plea.status == 'n' %}
+        <p><strong>Статус:</strong> Новая</p>
+        {% elif plea.status == 'c' %}
+        <p><strong>Статус:</strong> Выполнено</p>
+        {% else %}
+        <p><strong>Статус:</strong> принято в работу</p>
+        {% endif %}
     </div>
   </div>
 {% endblock %}

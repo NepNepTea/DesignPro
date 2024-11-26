@@ -21,4 +21,5 @@ urlpatterns = [
     re_path(r'^category/create/$', views.CategoryCreateView.as_view(), name='category_create'),
     re_path(r'^adminpleas/$', views.AdminPleaListView.as_view(), name='adminpleas'),
     re_path(r'^plea/(?P<pk>\d+)/complete/$', views.PleaAddDesign.as_view(), name='plea_complete'),
+    re_path(r'^plea/(?P<pk>\d+)/work/$', views.PleaAddComment.as_view(), name='plea_work'),
 ]

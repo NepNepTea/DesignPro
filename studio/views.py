@@ -177,3 +177,8 @@ class PleaAddDesign(UpdateView):
     fields = ["design","status"]
 
     template_name_suffix = "_add_design_form"
+class PleaAddComment(UpdateView):
+    model = Plea
+    fields = ["comentary","status"]
+
+    template_name_suffix = "_add_comentary_form"
