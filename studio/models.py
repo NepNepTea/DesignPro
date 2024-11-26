@@ -35,6 +35,8 @@ class Plea(models.Model):
     plan = models.ImageField(upload_to ='images/', null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     creationDate = models.DateField(default=date.today)
+    comentary = models.TextField(max_length=1000, null=True)
+    design = models.ImageField(upload_to ='images/', null=True)
 
     LOAN_STATUS = (
         ('n', 'Новая'),

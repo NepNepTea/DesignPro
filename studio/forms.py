@@ -20,3 +20,6 @@ class PleaForm(forms.Form):
 
 class ActivateUserForm(forms.Form):
     is_active = forms.BooleanField(initial=True, disabled=True)
+
+class PleaCompleteForm(forms.Form):
+    design = forms.ImageField()

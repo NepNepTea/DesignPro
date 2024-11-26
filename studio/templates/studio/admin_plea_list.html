@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Все заявки</h1>
+
+  {% if plea_list %}
+    <ul>
+      {% for plea in plea_list %}
+      <li>
+        <hr>
+        <p>Дата создания: {{ plea.creationDate }}</p>
+        <p>Название: {{ plea.name }}</p>
+        <p>Описание: {{ plea.description }}</p>
+        <p>Категория: {{ plea.category }}</p>
+        {% if plea.status == 'n' %}
+        <p>Статус: Новая</p>
+        <a href="#">Принять в работу</a><br>
+        <a href="{% url 'complete_plea' plea.id %}">Выполнить</a>
+        {% elif plea.status == 'c' %}
+        <p>Статус: Выполнено</p>
+        {% else %}
+        <p>Статус: принято в работу</p>
+        {% endif %}
+        <hr>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Нет заявок</p>
+  {% endif %}
+{% endblock %}

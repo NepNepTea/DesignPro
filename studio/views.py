@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm
+from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm, PleaCompleteForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.core.cache import cache
@@ -100,7 +100,7 @@ class PleaListView(LoginRequiredMixin,generic.ListView):
     template_name ='studio/plea_list.html'
 
     def get_queryset(self):
-        return Plea.objects.filter(author=self.request.user).order_by('creationDate')#.filter(status='n')
+        return Plea.objects.filter(author=self.request.user).order_by('creationDate')
 
 class PleaDelete(DeleteView):
     model = Plea
@@ -142,13 +142,10 @@ def activate_user(request, pk):
 
         form = ActivateUserForm(request.POST)
 
-        # Check if the form is valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             inactive_user.is_active = form.cleaned_data['is_active']
             inactive_user.save()
 
-            # redirect to a new URL:
             return HttpResponseRedirect(reverse('inactives') )
 
     else:
@@ -169,3 +166,25 @@ class CategoryDetailView(generic.DetailView):
 class CategoryCreateView(CreateView):
     model = Category
     fields = '__all__'
+
+class AdminPleaListView(LoginRequiredMixin,generic.ListView):
+    model = Plea
+    template_name ='studio/admin_plea_list.html'
+
+def complete_plea(request, pk):
+    plea = get_object_or_404(Plea, pk=pk)
+
+    if request.method == 'POST':
+
+        form = PleaCompleteForm(request.POST)
+
+        if form.is_valid():
+            plea.design = form.cleaned_data['design']
+            plea.save()
+
+            #return HttpResponseRedirect(reverse('adminpleas') )
+            return HttpResponseRedirect('adminpleas')
+
+    else:
+        form = PleaCompleteForm()
+        return render(request, 'studio/complete_plea.html', {'form': form, 'plea': plea})
