@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm, PleaCompleteForm
+from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.core.cache import cache
@@ -171,20 +171,9 @@ class AdminPleaListView(LoginRequiredMixin,generic.ListView):
     model = Plea
     template_name ='studio/admin_plea_list.html'
 
-def complete_plea(request, pk):
-    plea = get_object_or_404(Plea, pk=pk)
 
-    if request.method == 'POST':
+class PleaAddDesign(UpdateView):
+    model = Plea
+    fields = ["design","status"]
 
-        form = PleaCompleteForm(request.POST)
-
-        if form.is_valid():
-            plea.design = form.cleaned_data['design']
-            plea.save()
-
-            #return HttpResponseRedirect(reverse('adminpleas') )
-            return HttpResponseRedirect('adminpleas')
-
-    else:
-        form = PleaCompleteForm()
-        return render(request, 'studio/complete_plea.html', {'form': form, 'plea': plea})
+    template_name_suffix = "_add_design_form"

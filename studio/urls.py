@@ -20,5 +20,5 @@ urlpatterns = [
     re_path(r'^category/(?P<pk>\d+)$', views.CategoryDetailView.as_view(), name='category-detail'),
     re_path(r'^category/create/$', views.CategoryCreateView.as_view(), name='category_create'),
     re_path(r'^adminpleas/$', views.AdminPleaListView.as_view(), name='adminpleas'),
-    re_path(r'^plea/(?P<pk>[-\w]+)/complete/$', views.complete_plea, name='complete_plea'),
+    re_path(r'^plea/(?P<pk>\d+)/complete/$', views.PleaAddDesign.as_view(), name='plea_complete'),
 ]

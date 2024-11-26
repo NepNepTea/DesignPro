@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4aed052-2b44-4598-8be1-0460ab308b82" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DesignPro/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPro/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/studio/templates/studio/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/studio/templates/studio/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/studio/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/studio/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/studio/templates/studio/admin_plea_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/studio/templates/studio/admin_plea_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/studio/templates/studio/complete_plea.html" beforeDir="false" afterPath="$PROJECT_DIR$/studio/templates/studio/plea_add_design_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/studio/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/studio/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/studio/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/studio/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,21 +22,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2p9pCmyvufgmJbmO7tGnBmDwGXu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/practic/DesignPro"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/practic/DesignPro&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
