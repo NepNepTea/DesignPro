@@ -6,5 +6,6 @@
     {% if user.is_authenticated %}
     <a href="{% url 'plea_create'%}">Создать заявку на разработку дизайна</a>
     {% endif %}
+    <p>Количество принятых в работу заявок: {{ num_of_working_pleas }}</p>
 </main>
 {% endblock %}

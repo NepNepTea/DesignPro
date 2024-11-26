@@ -17,11 +17,13 @@ from django.http import HttpResponseRedirect
 from .forms import ActivateUserForm
 
 def index(request):
+    i_pleas = Plea.objects.filter(status='i')
+    num_of_working_pleas = i_pleas.count()
 
     return render(
         request,
         'index.html',
-        #context={'':,},
+        context={'num_of_working_pleas':num_of_working_pleas},
     )
 
 def sign_up(request):
