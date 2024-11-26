@@ -1,20 +1,16 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
-from .forms import LoginForm
 from django.core.cache import cache
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Plea
-from .forms import PleaForm
+from .models import Plea, Category
 from django.contrib.auth.models import User
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .forms import ActivateUserForm
 
 def index(request):
     i_pleas = Plea.objects.filter(status='i')
@@ -158,3 +154,7 @@ def activate_user(request, pk):
     else:
         form = ActivateUserForm()
         return render(request, 'studio/user_activate.html', {'form': form, 'inactive_user':inactive_user})
+
+class CategoryListView(LoginRequiredMixin,generic.ListView):
+    model = Category
+    template_name ='studio/categorys.html'

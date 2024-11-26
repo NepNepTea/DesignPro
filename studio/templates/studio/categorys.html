@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Категории</h1>
+  {% if category_list %}
+    <ul>
+      {% for category in category_list %}
+      <li>
+        <hr>
+        <p>{{ category.name }}</p>
+        <hr>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Нет категорий</p>
+  {% endif %}
+{% endblock %}
