@@ -8,6 +8,7 @@
       <li>
         <hr>
         <p>{{ category.name }}</p>
+        <a href="{{ category.get_absolute_url }}/delete/">Удалить категорию</a>
         <hr>
       </li>
       {% endfor %}
@@ -15,4 +16,5 @@
   {% else %}
     <p>Нет категорий</p>
   {% endif %}
+  <a href="{% url 'category_create'%}">Создать категорию</a>
 {% endblock %}

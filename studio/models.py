@@ -31,7 +31,7 @@ class Plea(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=1000, help_text="Введите описание заявки")
-    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, help_text="Выберите категорию заявки")
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, help_text="Выберите категорию заявки")
     plan = models.ImageField(upload_to ='images/', null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     creationDate = models.DateField(default=date.today)

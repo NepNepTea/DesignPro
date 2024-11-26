@@ -16,4 +16,7 @@ urlpatterns = [
     re_path(r'^inactives/$', views.UserListView.as_view(), name='inactives'),
     re_path(r'^inactive/(?P<pk>[-\w]+)/activate/$', views.activate_user, name='activate_user'),
     re_path(r'^categorys/$', views.CategoryListView.as_view(), name='categorys'),
+    re_path(r'^category/(?P<pk>\d+)/delete/$', views.CategoryDelete.as_view(), name='category_delete'),
+    re_path(r'^category/(?P<pk>\d+)$', views.CategoryDetailView.as_view(), name='category-detail'),
+    re_path(r'^category/create/$', views.CategoryCreateView.as_view(), name='category_create'),
 ]

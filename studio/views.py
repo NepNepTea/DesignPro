@@ -158,3 +158,14 @@ def activate_user(request, pk):
 class CategoryListView(LoginRequiredMixin,generic.ListView):
     model = Category
     template_name ='studio/categorys.html'
+
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = reverse_lazy('categorys')
+
+class CategoryDetailView(generic.DetailView):
+    model = Category
+
+class CategoryCreateView(CreateView):
+    model = Category
+    fields = '__all__'
