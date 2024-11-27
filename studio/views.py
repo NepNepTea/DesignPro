@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm
+from .forms import RegisterForm, ActivateUserForm, PleaForm, LoginForm, AddAdminForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.core.cache import cache
@@ -182,3 +182,33 @@ class PleaAddComment(UpdateView):
     fields = ["comentary","status"]
 
     template_name_suffix = "_add_comentary_form"
+
+class SuperuserPleaListView(LoginRequiredMixin,generic.ListView):
+    model = Plea
+    template_name ='studio/superuser_plea_list.html'
+    def get_queryset(self):
+        return Plea.objects.filter(status='n')
+
+#class PleaAddAdmin(UpdateView):
+    #model = Plea
+    #fields = ["adminUserName"]
+
+    #template_name_suffix = "_add_admin_form"
+
+def PleaAddAdmin(request, pk):
+    plea = get_object_or_404(Plea, pk=pk)
+    admins = User.objects.all().filter(is_staff=True)
+
+    if request.method == 'POST':
+
+        form = AddAdminForm(request.POST)
+
+        if form.is_valid():
+            plea.adminUserName = form.cleaned_data['adminUserName']
+            plea.save()
+
+            return HttpResponseRedirect(reverse('inactives') )
+
+    else:
+        form = AddAdminForm()
+        return render(request, 'studio/plea_add_admin_form.html', {'form': form, 'plea':plea, 'admins':admins})

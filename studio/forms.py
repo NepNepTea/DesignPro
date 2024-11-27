@@ -20,3 +20,6 @@ class PleaForm(forms.Form):
 
 class ActivateUserForm(forms.Form):
     is_active = forms.BooleanField(initial=True, disabled=True)
+
+class AddAdminForm(forms.Form):
+    adminUserName = forms.CharField(max_length=150)

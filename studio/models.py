@@ -2,8 +2,13 @@ from django.db import models
 from django.urls import reverse
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from datetime import date
+
+class Admin(AbstractUser):
+
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
 
 class Category(models.Model):
     name = models.CharField(
@@ -37,6 +42,7 @@ class Plea(models.Model):
     creationDate = models.DateField(default=date.today)
     comentary = models.TextField(max_length=1000, null=True)
     design = models.ImageField(upload_to ='images/', null=True)
+    adminUserName = models.CharField(max_length=150, null=True, blank=True)
 
     LOAN_STATUS = (
         ('n', 'Новая'),

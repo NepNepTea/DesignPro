@@ -41,7 +41,12 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'categorys'%}">Управление категориями</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'adminpleas'%}">Изменение статуса заявки</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'adminpleas'%}">Управление заявками</a>
+                  </li>
+                  {% endif %}
+                  {% if user.is_superuser %}
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'supermanage'%}">Распределение заявок</a>
                   </li>
                   {% endif %}
                 {% else %}

@@ -22,4 +22,6 @@ urlpatterns = [
     re_path(r'^adminpleas/$', views.AdminPleaListView.as_view(), name='adminpleas'),
     re_path(r'^plea/(?P<pk>\d+)/complete/$', views.PleaAddDesign.as_view(), name='plea_complete'),
     re_path(r'^plea/(?P<pk>\d+)/work/$', views.PleaAddComment.as_view(), name='plea_work'),
+    re_path(r'^supermanage/$', views.SuperuserPleaListView.as_view(), name='supermanage'),
+    re_path(r'^plea/(?P<pk>\d+)/addmin/$', views.PleaAddAdmin, name='addmin'),
 ]
